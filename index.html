@@ -537,7 +537,59 @@
     }
     @media (prefers-reduced-motion:reduce) { .hero h1 em::after { transform:scaleX(1); } .motion-control { display:none; } .bag-scene { transform:none!important; } }
 
+  
+    .product-open {width:100%;border:0;cursor:pointer;color:inherit;font:inherit;}
+    .product-open:focus-visible {outline:3px solid var(--green);outline-offset:-4px;}
+    #product-dialog {width:min(1050px,calc(100% - 30px));}
+    .product-detail-grid {display:grid;grid-template-columns:1fr 1.15fr;gap:30px;margin-top:24px;}
+    .product-detail-photo {min-height:300px;border-radius:20px;overflow:hidden;background:var(--surface-2);display:grid;place-items:center;padding:24px;}
+    .product-detail-photo img {width:100%;max-height:420px;object-fit:contain;}
+    .product-price {font-size:25px;font-weight:800;margin:0 0 6px;}
+    .product-specs {width:100%;border-collapse:collapse;font-size:14px;margin:20px 0;}
+    .product-specs th,.product-specs td {padding:13px 12px;border-bottom:1px solid var(--line);text-align:left;}
+    .product-specs th {width:50%;color:var(--muted);font-weight:500;}
+    .product-specs tr:nth-child(odd) {background:var(--surface-2);}
+    .product-detail-note {font-size:12px;}
+    @media(max-width:700px) {.product-detail-grid {grid-template-columns:1fr;gap:20px;}.product-detail-photo {min-height:210px;}.product-detail-photo img {max-height:260px;}}
+  
+    .quote-launch {position:static;white-space:nowrap;}
+    .quote-row {padding:20px 0;border-bottom:1px solid var(--line);}
+    .quote-row-controls {display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:12px;}
+    .quote-row input {width:95px;padding:10px;border:1px solid var(--line);border-radius:10px;background:white;}
+    .quote-row select {padding:10px;border:1px solid var(--line);border-radius:10px;background:white;}
+    .quote-notes {width:100%;min-height:90px;padding:12px;border:1px solid var(--line);border-radius:12px;margin:10px 0 20px;font:inherit;}
+    .quote-status {font-size:13px;color:var(--green);}
+  
+    #product-dialog .dialog-body {padding:0;}
+    #product-dialog .dialog-top {position:sticky;top:0;background:var(--surface);z-index:2;padding:16px 24px;border-bottom:1px solid var(--line);}
+    .product-detail-grid {align-items:start;margin:0;padding:24px;}
+    .product-detail-photo {min-height:280px;aspect-ratio:1;max-height:380px;}
+    #product-detail-title {font-size:clamp(25px,3vw,34px);margin:0 0 12px;}
+    #product-detail-description {font-size:14px;margin:0 0 14px;}
+    .product-specs {margin:14px 0;font-size:13px;}
+    .product-specs th,.product-specs td {padding:9px 10px;}
+    .product-detail-photo .mini-bag {margin:0 auto;}
+    .product-detail-photo p {text-align:center;margin-top:28px;}
+    @media(max-width:700px) {.quote-launch {padding:10px 13px;font-size:12px;}.product-detail-grid {padding:18px;}.product-detail-photo {aspect-ratio:auto;min-height:220px;}.product-specs th,.product-specs td {padding:10px 8px;}}
+  
+    .product-open {aspect-ratio:4/3;height:auto;}
+    .product-open img {position:absolute;inset:22px 22px 32px;width:calc(100% - 44px);height:calc(100% - 54px);object-fit:contain;}
+  
+    /* Brand palette: retain the light surfaces, echo the emblem through accents. */
+    :root {--brand-orange:#bf5b10;--brand-orange-soft:#fff0df;--accent-text:#3c7139;}
+    .brand-logo {display:block;width:52px;height:52px;object-fit:contain;flex-shrink:0;}
+    .hero h1 em {color:var(--brand-orange);}
+    .progress i {background:linear-gradient(90deg,var(--green),#e99328);}
+    .tag {background:#edf3e9;}
+    .eyebrow::selection {background:var(--brand-orange-soft);}
+    .button.secondary:hover {border-color:var(--brand-orange);}
+    .product-price {color:var(--brand-orange);}
+    header .nav {gap:20px;}
+    @media(max-width:1150px) {header nav {gap:10px;}header nav a {font-size:12px;}header .brand {font-size:19px;}}
+    @media(max-width:700px) {.brand-logo {width:40px;height:40px;}header .brand {font-size:17px;}header .nav {gap:10px;}.quote-launch {font-size:11px;padding:9px 11px;}}
+    @media(max-width:360px) {header .brand {font-size:15px;}.brand-logo {width:34px;height:34px;}}
   </style>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kiran-saju/greenpentair/main/logo.png">
 </head>
 
 <body>
@@ -548,11 +600,7 @@
   <header id="site-header">
     <div class="container nav">
       <a class="brand" href="#home" aria-label="Green Pentair home">
-        <svg class="brand-icon" viewBox="0 0 34 38" aria-hidden="true">
-          <path d="M3 10h28l-2.2 24.2A3.6 3.6 0 0 1 25.2 37H8.8a3.6 3.6 0 0 1-3.6-2.8L3 10Z" fill="var(--green)"/>
-          <path d="M11 11V8a6 6 0 0 1 12 0v3" fill="none" stroke="var(--leaf)" stroke-width="2.6" stroke-linecap="round"/>
-          <circle cx="17" cy="23" r="4" fill="var(--lime)"/>
-        </svg>
+        <img class="brand-logo" src="https://raw.githubusercontent.com/kiran-saju/greenpentair/main/logo.png" alt="" width="52" height="52" decoding="async">
         Green Pentair
       </a>
 
@@ -567,7 +615,7 @@
       </nav>
 
       <div class="nav-actions">
-        <a class="button sm nav-cta" href="#contact">Get a Quote <span class="arrow" aria-hidden="true">↗</span></a>
+        <button class="button sm quote-launch" id="quote-open" type="button">Quote Cart (<span id="quote-count">0</span>)</button>
         <button class="icon-btn menu" id="menu-button" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Open menu">
           <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
@@ -658,8 +706,8 @@
           <span class="eyebrow">Our product range</span>
           <h2>Find the right bag for your business.</h2>
           <p>
-            Browse D-cut bags, loop handle bags, BOPP laminated bags,
-            rice and grocery packaging, and paper carry bags.
+            Browse D-cut non-woven bags, BOPP box bags, metallic box-type bags,
+            laminated bags and loop bags.
             Discuss available specifications with our team.
           </p>
         </div>
@@ -720,9 +768,9 @@
         <div class="section-top reveal">
           <div class="heading">
             <span class="eyebrow">Our printing work</span>
-            <h2>Real shops. Their brands. Our bags.</h2>
+            <h2>A preview of our project gallery.</h2>
             <p>
-              Explore completed customer printing projects for inspiration.
+              Demo projects below show how this gallery will look with content.
               See how different bag styles work with shop names, logos and artwork.
             </p>
           </div>
@@ -733,10 +781,10 @@
 
         <div class="chips" style="margin:0 0 20px" role="group" aria-label="Filter printing projects">
           <button class="chip" type="button" data-gallery-filter="all" aria-pressed="true">All Work</button>
-          <button class="chip" type="button" data-gallery-filter="d-cut" aria-pressed="false">D-Cut</button>
+          <button class="chip" type="button" data-gallery-filter="bopp" aria-pressed="false">BOPP</button>
           <button class="chip" type="button" data-gallery-filter="loop" aria-pressed="false">Loop Handle</button>
           <button class="chip" type="button" data-gallery-filter="laminated" aria-pressed="false">Laminated</button>
-          <button class="chip" type="button" data-gallery-filter="paper" aria-pressed="false">Paper Bags</button>
+          <button class="chip" type="button" data-gallery-filter="metallic" aria-pressed="false">Metallic</button>
         </div>
 
         <p class="result" id="gallery-count" role="status"></p>
@@ -759,8 +807,8 @@
         </div>
 
         <p class="gallery-note">
-          Customer branding is displayed with permission.
-          Featured projects are examples of completed work;
+          Demo gallery — representative mockups for layout preview only; no completed customer projects are shown.
+          Replace these samples with approved customer project photographs before publishing;
           availability and specifications are confirmed separately.
         </p>
       </div>
@@ -827,10 +875,11 @@
         <div class="heading reveal">
           <span class="eyebrow">Customer reviews</span>
           <h2>Feedback from the businesses we serve.</h2>
-          <p>Read customer experiences with our products, printing work and service.</p>
+          <p>Fictional sample reviews below demonstrate the layout for our products, printing work and service.</p>
         </div>
 
-        <div class="grid" id="review-grid"></div>
+        <p class="gallery-note"><strong>Demo reviews:</strong> Fictional examples for design preview. Replace with genuine customer feedback before publishing.</p>
+            <div class="grid" id="review-grid"></div>
 
         <div class="empty" id="review-empty">
           <div class="empty-icon" aria-hidden="true">“</div>
@@ -932,7 +981,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a class="brand" href="#home">Green Pentair</a>
+          <a class="brand" href="#home"><img class="brand-logo" src="https://raw.githubusercontent.com/kiran-saju/greenpentair/main/logo.png" alt="" width="52" height="52" loading="lazy">Green Pentair</a>
           <p>Bag manufacturer in Kollam, Kerala.</p>
           <p>GSTIN: 32AARFG3098B1ZG</p>
         </div>
@@ -971,6 +1020,29 @@
     </button>
   </div>
 
+  
+  <dialog id="quote-dialog" aria-labelledby="quote-title"><div class="dialog-body">
+    <div class="dialog-top"><h2 id="quote-title">Your quote cart</h2><button class="icon-btn close" id="quote-close" type="button" aria-label="Close quote cart">×</button></div>
+    <p>Choose quantities and units. Final pricing and availability will be confirmed by Green Pentair.</p>
+    <div id="quote-items"></div>
+    <label for="quote-notes">Size, printing requirements & delivery location</label><textarea class="quote-notes" id="quote-notes" placeholder="Your shop name, preferred sizes, logo printing and delivery location…"></textarea>
+    <button class="button block" id="quote-send" type="button">Send Quote Enquiry on WhatsApp ↗</button>
+    <p id="quote-status" class="quote-status" role="status"></p>
+  </div></dialog>
+  <dialog id="product-dialog" aria-labelledby="product-detail-title">
+    <div class="dialog-body">
+      <div class="dialog-top"><span class="eyebrow">Product details</span><button class="icon-btn close" id="product-close" type="button" aria-label="Close product details">×</button></div>
+      <div class="product-detail-grid"><div class="product-detail-photo" id="product-detail-photo"></div><div>
+        <h2 id="product-detail-title"></h2><p id="product-detail-description"></p>
+        <div class="product-price" id="product-detail-price"></div><p class="product-detail-note" id="product-price-note"></p>
+        <label for="product-size">Preferred size (inches)</label><select id="product-size" class="quote-notes" style="min-height:0"></select>
+        <table class="product-specs" aria-label="Product specifications"><tbody id="product-detail-specs"></tbody></table>
+        <p class="product-detail-note" id="product-detail-note"></p>
+        <button class="button secondary block" type="button" id="product-detail-add" style="margin-bottom:12px">Add to Quote Cart +</button>
+        <button class="button block" type="button" id="product-detail-enquiry">Get Latest Price & Enquire ↗</button>
+      </div></div>
+    </div>
+  </dialog>
   <dialog id="project-dialog" aria-labelledby="project-title">
     <div class="dialog-body">
       <div class="dialog-top">
@@ -1000,37 +1072,78 @@
       Example: image: "images/d-cut-bag.webp"
     */
     const products = [
-      {
-        name: "D-Cut Non-Woven Bags", category: "d-cut", label: "D-cut bags",
-        description: "Carry bags with a cut-out handle. Enquire about plain, printed and promotional options.",
-        keywords: "d cut non woven printed promotional shopping", image: "", illustration: "printed", color: "#d4ddb8"
-      },
-      {
-        name: "Loop Handle Non-Woven Bags", category: "loop", label: "Loop handle bags",
-        description: "Bags with attached loop handles. Discuss available sizes, colours and printing requirements.",
-        keywords: "loop handle non woven shopping printed", image: "", illustration: "loop", color: "#c5d8cd"
-      },
-      {
-        name: "BOPP Laminated Non-Woven Bags", category: "laminated", label: "Laminated bags",
-        description: "Non-woven bags with a BOPP laminated finish, including decorative and branded designs.",
-        keywords: "bopp laminated non woven graphic printed", image: "", illustration: "loop printed", color: "#ddc7bb"
-      },
-      {
-        name: "Rice & Grocery Packaging Bags", category: "grocery", label: "Packaging bags",
-        description: "Explore printed packaging options for rice and grocery requirements. Confirm material and specifications with our team.",
-        keywords: "rice grocery packaging sack printed", image: "", illustration: "sack printed", color: "#e2dcae"
-      },
-      {
-        name: "Paper Carry Bags", category: "paper", label: "Paper bags",
-        description: "Plain kraft and patterned paper carry bags. Ask about available formats and sizes.",
-        keywords: "paper kraft carry gift shopping printed", image: "", illustration: "loop paper", color: "#c99d6c"
-      }
-    ];
+  {
+    "name": "D-Cut Non-Woven Bags",
+    "category": "d-cut",
+    "label": "D-cut bags",
+    "description": "D-cut non-woven carry bags with an integrated handle opening.",
+    "keywords": "d-cut non-woven bags",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/D-cut%20non-woven%20bag.png",
+    "illustration": "printed",
+    "color": "#d4ddb8",
+    "detailNote": "Representative product image. Confirm colours, finish and specifications when requesting your quotation."
+  },
+  {
+    "name": "BOPP Box Bags",
+    "category": "bopp",
+    "label": "BOPP box bags",
+    "description": "Box-style bags with a BOPP laminated finish. Discuss printing and available specifications.",
+    "keywords": "bopp box bags",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/BOPP%20box%20bags.png",
+    "illustration": "loop",
+    "color": "#c5d8cd",
+    "detailNote": "Representative product image. Confirm colours, finish and specifications when requesting your quotation."
+  },
+  {
+    "name": "Metallic Box-Type Bags",
+    "category": "metallic",
+    "label": "Metallic box bags",
+    "description": "Box-style carry bags with a metallic finish. Enquire about colours and printing.",
+    "keywords": "metallic box-type bags",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/Metallic%20box.png",
+    "illustration": "loop",
+    "color": "#ddc7bb",
+    "detailNote": "Representative product image. Confirm colours, finish and specifications when requesting your quotation."
+  },
+  {
+    "name": "Laminated Bags",
+    "category": "laminated",
+    "label": "Laminated bags",
+    "description": "Laminated carry bags for your business. Share your preferred design and size.",
+    "keywords": "laminated bags",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/Laminated%20bags.png",
+    "illustration": "loop printed",
+    "color": "#e2dcae",
+    "detailNote": "Representative product image. Confirm colours, finish and specifications when requesting your quotation."
+  },
+  {
+    "name": "Loop Bags",
+    "category": "loop",
+    "label": "Loop bags",
+    "description": "Non-woven carry bags with attached loop handles. Enquire about sizes and colours.",
+    "keywords": "loop bags",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/Loop%20bags.png",
+    "illustration": "loop",
+    "color": "#c5d8cd",
+    "detailNote": "Representative product image. Confirm colours, finish and specifications when requesting your quotation."
+  }
+];
 
-    const categories = [
-      ["all", "All categories"], ["d-cut", "D-Cut"], ["loop", "Loop Handle"],
-      ["laminated", "BOPP Laminated"], ["grocery", "Rice & Grocery"], ["paper", "Paper Bags"]
-    ];
+    const dCutSizes = ["9 × 12", "10 × 14", "12 × 16", "14 × 18", "16 × 20", "18 × 22"];
+    const boxSizes = ["8 × 9 × 3", "10 × 12 × 3.5", "12 × 15 × 4", "15 × 12 × 4", "15 × 16 × 5", "17 × 15 × 5"];
+    products.forEach(p => {
+      p.sizes = p.category === "d-cut" ? dCutSizes : ["bopp", "metallic", "laminated"].includes(p.category) ? boxSizes : [];
+      p.isBox = ["bopp", "metallic", "laminated"].includes(p.category);
+      p.specifications = {
+        "Sizes (inches)": p.sizes.length ? p.sizes.join("; ") : "Confirm with our team",
+        "Printing MOQ": p.isBox ? "Starts from 500 pieces for printed box-type bags" : "Confirm with our team"
+      };
+      p.detailNote = p.isBox
+        ? "Box-bag sizes are shown as supplied. Confirm availability for this finish and the dimension order with our team. Representative product image."
+        : "Dimensions are shown in the supplied order. Confirm GSM, colours and printing options with our team. Representative product image.";
+    });
+
+    const categories = [["all", "All categories"], ["d-cut", "D-cut bags"], ["bopp", "BOPP box bags"], ["metallic", "Metallic box bags"], ["laminated", "Laminated bags"], ["loop", "Loop bags"]];
 
     /*
       Add only approved, completed customer projects.
@@ -1044,7 +1157,62 @@
       }
       Supported categories: d-cut, loop, laminated, paper.
     */
-    const projects = [];
+    const projects = [
+  {
+    "title": "Demo \u2014 Textile shop packaging",
+    "customer": "Demo textile shop",
+    "category": "d-cut",
+    "bagType": "D-Cut Non-Woven Bag",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/D-cut%20non-woven%20bag.png",
+    "alt": "Representative mockup for Textile shop packaging",
+    "description": "Sample presentation of carry bags for a textile store. Layout preview only; this is not a completed customer project."
+  },
+  {
+    "title": "Demo \u2014 Boutique box bags",
+    "customer": "Demo boutique",
+    "category": "laminated",
+    "bagType": "Printed Laminated Bag",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/Laminated%20bags.png",
+    "alt": "Representative mockup for Boutique box bags",
+    "description": "Sample presentation of patterned bags for boutique packaging. Layout preview only; this is not a completed customer project."
+  },
+  {
+    "title": "Demo \u2014 Retail shopping bags",
+    "customer": "Demo retail store",
+    "category": "loop",
+    "bagType": "Loop Handle Bag",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/Loop%20bags.png",
+    "alt": "Representative mockup for Retail shopping bags",
+    "description": "Sample presentation of loop-handle bags for everyday retail use. Layout preview only; this is not a completed customer project."
+  },
+  {
+    "title": "Demo \u2014 Branded box packaging",
+    "customer": "Demo clothing store",
+    "category": "bopp",
+    "bagType": "BOPP Box Bag",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/BOPP%20box%20bags.png",
+    "alt": "Representative mockup for Branded box packaging",
+    "description": "Sample presentation of box bags for a clothing store. Layout preview only; this is not a completed customer project."
+  },
+  {
+    "title": "Demo \u2014 Premium gift packaging",
+    "customer": "Demo gift shop",
+    "category": "metallic",
+    "bagType": "Metallic Box-Type Bag",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/Metallic%20box.png",
+    "alt": "Representative mockup for Premium gift packaging",
+    "description": "Sample presentation of metallic bags for gift packaging. Layout preview only; this is not a completed customer project."
+  },
+  {
+    "title": "Demo \u2014 Event carry bags",
+    "customer": "Demo event organiser",
+    "category": "loop",
+    "bagType": "Loop Handle Bag",
+    "image": "https://raw.githubusercontent.com/kiran-saju/greenpentair/main/Loop%20bags.png",
+    "alt": "Representative mockup for Event carry bags",
+    "description": "Sample presentation of carry bags for an event. Layout preview only; this is not a completed customer project."
+  }
+];
 
     /*
       Add genuine customer feedback with permission.
@@ -1054,16 +1222,41 @@
         source: "Shared directly with Green Pentair" }
       Rating must be a whole number from 1 to 5. Use YYYY-MM-DD for the date, or "".
     */
-    const reviews = [];
+    const reviews = [
+  {
+    "name": "Demo customer 1",
+    "business": "Textile retailer",
+    "rating": 5,
+    "text": "The bag options made it easy to choose a style for our shop. We appreciated the clear guidance on sizes and printing.",
+    "date": "",
+    "source": "Fictional review \u2014 layout preview only"
+  },
+  {
+    "name": "Demo customer 2",
+    "business": "Boutique owner",
+    "rating": 5,
+    "text": "The printed packaging suited the look we wanted for our boutique. The enquiry process was simple and convenient.",
+    "date": "",
+    "source": "Fictional review \u2014 layout preview only"
+  },
+  {
+    "name": "Demo customer 3",
+    "business": "Retail store owner",
+    "rating": 4,
+    "text": "We could discuss quantities, colours and delivery in one conversation. A useful range of packaging options for our store.",
+    "date": "",
+    "source": "Fictional review \u2014 layout preview only"
+  }
+];
 
     const faqs = [
-      ["What types of bags does Green Pentair offer?", "Our range includes D-cut non-woven bags, loop handle bags, BOPP laminated non-woven bags, printed carry bags, rice and grocery packaging bags, and paper carry bags. Contact us to confirm current availability and specifications."],
+      ["What types of bags does Green Pentair offer?", "Our range includes D-cut non-woven bags, BOPP box bags, metallic box-type bags, laminated bags and loop bags. Metallic D-cut bags are coming soon. Contact us to confirm current availability and specifications."],
       ["What is the difference between D-cut and loop handle bags?", "D-cut bags have a handle opening cut into the upper part of the bag. Loop handle bags have handles attached to the bag body. The suitable option depends on your packaging requirements and the specifications of the individual product."],
       ["Can I enquire about bags printed with my shop logo?", "Yes. Share your logo or artwork, preferred bag type, dimensions and quantity. Our team will confirm suitable printing options, artwork requirements and pricing."],
       ["Can I request printing similar to a gallery project?", "Yes. Use the enquiry button on a gallery project to mention that example. Our team will discuss a suitable design using your own business branding and confirm available specifications."],
       ["What does GSM mean?", "GSM means grams per square metre and describes the fabric’s mass per unit area. Consider it alongside bag dimensions, construction and intended use. Ask our team to confirm the GSM of the product you are considering."],
       ["What sizes, colours and GSM options are available?", "Options depend on the bag type and current product range. Send your required dimensions, colour, GSM and quantity so our team can confirm availability and provide a quotation."],
-      ["What is the minimum order quantity?", "Minimum order quantities may differ by product and printing requirement. Specify the bag type and quantity you need when enquiring, and our team will confirm the applicable minimum."],
+      ["What is the minimum order quantity?", "Printing MOQ for box-type bags starts from 500 pieces. Minimum quantities for D-cut bags, loop bags and other requirements will be confirmed with your quotation."],
       ["How do I request a quotation?", "Use an enquiry button and share the bag type, size, quantity, printing requirements and delivery location. These details help us prepare a quotation for your order."],
       ["Can I purchase directly through the website?", "This website is a product catalogue and enquiry platform. Contact Green Pentair to confirm product specifications, pricing, payment terms and order arrangements."],
       ["How long will production and delivery take?", "Timelines depend on availability, order quantity, printing requirements and delivery location. Production and shipment estimates will be confirmed before your order is finalised."],
@@ -1086,7 +1279,7 @@
       if (!value) return "";
       try {
         const url = new URL(value, document.baseURI);
-        if (["http:", "https:", "file:"].includes(url.protocol)) return url.href;
+        if ((["http:", "https:", "file:"].includes(url.protocol) || /^data:image\/(webp|png|jpeg);base64,/.test(value))) return url.href;
       } catch {}
       return "";
     }
@@ -1110,13 +1303,13 @@
     function productCard(product, i) {
       const image = safeImagePath(product.image);
       const visual = image
-        ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" loading="lazy">`
+        ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" loading="lazy"><small>Representative product image</small>`
         : `<div class="mini-bag ${escapeHtml(product.illustration)}" style="--bag:${escapeHtml(product.color)}" aria-hidden="true"></div>
            <small>Product illustration</small>`;
 
       return `
         <article class="card reveal visible" style="--d:${i * 60}ms">
-          <div class="visual">${visual}</div>
+          <button class="visual product-open" type="button" data-product="${products.indexOf(product)}" aria-label="View details for ${escapeHtml(product.name)}">${visual}</button>
           <div class="card-body">
             <span class="tag">${escapeHtml(product.label)}</span>
             <h3>${escapeHtml(product.name)}</h3>
@@ -1125,9 +1318,10 @@
               <li class="asks-label" style="border:0;padding:0">Ask about:</li>
               <li>Size</li><li>Colour</li><li>Printing</li>
             </ul>
-            <button class="button secondary block sm" type="button" data-enquiry="${escapeHtml(product.name)}">
-              Enquire About This Type <span class="arrow" aria-hidden="true">↗</span>
+            <button class="button secondary block sm" type="button" data-product="${products.indexOf(product)}">
+              View Product Details <span class="arrow" aria-hidden="true">↗</span>
             </button>
+            <button class="button block sm" type="button" data-quote-add="${products.indexOf(product)}" style="margin-top:10px">Add to Quote +</button>
           </div>
         </article>`;
     }
@@ -1364,6 +1558,107 @@
       if (!button) return;
       if (button.classList.contains("wa")) enquire("", true);
       else enquire(button.dataset.enquiry);
+    });
+
+    /* Quote cart uses session storage so selections survive page refreshes. */
+    let quoteCart = [];
+    try {
+      const saved = JSON.parse(sessionStorage.getItem("greenpentair-quote") || "[]");
+      if (Array.isArray(saved)) quoteCart = saved.filter(x => products.some(p => p.name === x.name) && Number.isInteger(x.qty) && x.qty > 0 && ["pieces", "kg"].includes(x.unit));
+    } catch {}
+    function saveQuote() {
+      try { sessionStorage.setItem("greenpentair-quote", JSON.stringify(quoteCart)); } catch {}
+      $("quote-count").textContent = quoteCart.length;
+    }
+    function renderQuote() {
+      saveQuote();
+      $("quote-send").disabled = !quoteCart.length;
+      $("quote-items").innerHTML = quoteCart.length ? quoteCart.map((item, i) => `
+        <div class="quote-row"><strong>${escapeHtml(item.name)}</strong><p class="product-detail-note">Size: ${escapeHtml(item.size || "To be discussed")}${item.size && item.size !== "To be discussed" ? " inches" : ""}</p><div class="quote-row-controls">
+          <label>Quantity <input type="number" min="1" max="10000000" step="1" value="${item.qty}" data-quote-qty="${i}" aria-label="Quantity for ${escapeHtml(item.name)}"></label>
+          <label>Unit <select data-quote-unit="${i}" aria-label="Unit for ${escapeHtml(item.name)}"><option value="pieces" ${item.unit === "pieces" ? "selected" : ""}>Pieces</option><option value="kg" ${item.unit === "kg" ? "selected" : ""}>Kg</option></select></label>
+          <button class="button secondary sm" type="button" data-quote-remove="${i}" aria-label="Remove ${escapeHtml(item.name)}">Remove</button>
+        </div></div>`).join("") : '<p>Your quote cart is empty. Add bags from the product cards.</p>';
+    }
+    function addToQuote(p, size = "To be discussed") {
+      if (!p) return;
+      const existing = quoteCart.find(item => item.name === p.name && (item.size || "To be discussed") === size);
+      if (existing) existing.qty = Math.min(10000000, existing.qty + 1);
+      else quoteCart.push({name:p.name, size, qty:1, unit:"pieces"});
+      renderQuote();
+      notify(`${p.name} added to your quote cart.`);
+    }
+    document.addEventListener("click", event => {
+      const add = event.target.closest("[data-quote-add]");
+      if (add) addToQuote(products[Number(add.dataset.quoteAdd)]);
+      const remove = event.target.closest("[data-quote-remove]");
+      if (remove) {quoteCart.splice(Number(remove.dataset.quoteRemove), 1);renderQuote();}
+    });
+    $("quote-items").addEventListener("change", event => {
+      const el = event.target;
+      if (el.hasAttribute("data-quote-qty")) {
+        const item = quoteCart[Number(el.dataset.quoteQty)];
+        const qty = Number(el.value);
+        if (!Number.isInteger(qty) || qty < 1 || qty > 10000000) {el.value = item.qty;el.reportValidity();return;}
+        item.qty = qty;
+      }
+      if (el.hasAttribute("data-quote-unit")) quoteCart[Number(el.dataset.quoteUnit)].unit = el.value;
+      saveQuote();
+    });
+    $("quote-open").addEventListener("click", () => {renderQuote();$("quote-status").textContent = "";$("quote-dialog").showModal();});
+    $("quote-close").addEventListener("click", () => $("quote-dialog").close());
+    $("quote-send").addEventListener("click", () => {
+      if (!quoteCart.length) return;
+      if (!/^[1-9][0-9]{6,14}$/.test(WHATSAPP_NUMBER)) {
+        $("quote-status").textContent = "The business WhatsApp number needs to be added before this enquiry can be sent.";
+        return;
+      }
+      const message = "Hello Green Pentair, please send a quotation for these bags:\n\n" +
+        quoteCart.map((item, i) => `${i + 1}. ${item.name}\nSize: ${item.size || "To be discussed"}${item.size && item.size !== "To be discussed" ? " inches" : ""}\nQuantity: ${item.qty} ${item.unit}`).join("\n\n") +
+        "\n\nAdditional requirements:\n" + ($("quote-notes").value.trim() || "To be discussed") + "\n\nPlease confirm prices, minimum order quantities, available specifications and delivery timeline.";
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    });
+    renderQuote();
+
+    /* Product details: populate each product's specifications when confirmed. */
+    const productDialog = $("product-dialog");
+    let selectedProduct = null;
+    document.addEventListener("click", event => {
+      const button = event.target.closest("[data-product]");
+      if (!button) return;
+      selectedProduct = products[Number(button.dataset.product)];
+      if (!selectedProduct) return;
+      const p = selectedProduct;
+      $("product-detail-title").textContent = p.name;
+      $("product-detail-description").textContent = p.description;
+      $("product-detail-price").textContent = p.price || "Price on enquiry";
+      $("product-price-note").textContent = p.priceNote || "Request pricing for your quantity and printing requirements.";
+      const image = safeImagePath(p.image);
+      $("product-detail-photo").innerHTML = image
+        ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(p.name)}">`
+        : `<div><div class="mini-bag ${escapeHtml(p.illustration)}" style="--bag:${escapeHtml(p.color)}" aria-hidden="true"></div><p class="product-detail-note">Product illustration</p></div>`;
+      $("product-size").innerHTML = `<option value="To be discussed">Help me choose / discuss size</option>` + p.sizes.map(size => `<option value="${escapeHtml(size)}">${escapeHtml(size)} inches</option>`).join("");
+      const fields = ["Sizes (inches)","Printing MOQ","GSM (Fabric Density)","Material Quality","Printing","Fabric Color","Lamination","Usage / Application","Bag Style"];
+      $("product-detail-specs").innerHTML = fields.map(key => `<tr><th scope="row">${escapeHtml(key)}</th><td>${escapeHtml(p.specifications?.[key] || "Confirm with our team")}</td></tr>`).join("");
+      $("product-detail-note").textContent = p.detailNote || "Available specifications depend on the selected variant. Share your requirements for a quotation.";
+      productDialog.showModal();
+    });
+    $("product-detail-add").addEventListener("click", () => {
+      if (!selectedProduct) return;
+      addToQuote(selectedProduct, $("product-size").value);
+      productDialog.close();
+      $("quote-status").textContent = `${selectedProduct.name} added. Adjust your quantity below.`;
+      $("quote-dialog").showModal();
+    });
+    $("product-close").addEventListener("click", () => productDialog.close());
+    $("product-detail-enquiry").addEventListener("click", () => {
+      productDialog.close();
+      if (selectedProduct) enquire(`${selectedProduct.name} — preferred size: ${$("product-size").value}${$("product-size").value !== "To be discussed" ? " inches" : ""}`);
+    });
+    productDialog.addEventListener("click", event => {
+      if (event.target !== productDialog) return;
+      const r = productDialog.getBoundingClientRect();
+      if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) productDialog.close();
     });
 
     /* ============ Project dialog with prev/next ============ */
